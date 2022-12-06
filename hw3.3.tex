@@ -1,0 +1,61 @@
+%Colle du Mercredi 28 a Janson, edp
+\documentclass{scrartcl}
+
+\usepackage{cmap}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{ marvosym }
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Algorithmie // HW3 // Question 3}
+\author{Oscar Garnier}
+\date{\today}
+
+
+\begin{document}
+\newcommand{\E}[1]{\section*{Exo #1}}
+\newcommand{\CR}[2]{\section*{#1 // note : #2}}
+\newcommand{\Q}[1]{\section*{Exercise #1}}
+\newcommand{\SQ}[1]{\subsection*{Question #1}}
+\maketitle
+
+
+\SQ{1}
+For every edge in \( M \), there are two vertices that are connected, so only one of them can be part of an independent set. 
+Let \( I \) be an independent set with \( |I| > 2n - k, |I| \geq 2n - k + 1 \). There are \( 2n - 2k \) unmatched vertices, which means (let us assmilate \( M \) as a set of edges and as a set of vertices, there is no ambiguity), \( |M \cap I| \geq (2n - k + 1) - (2n - 2k) = k + 1 \). Since \( |M| = k \), this means \( \exists e \in M, e = (u,v) \)  s.t. \( u,v \in I \). 
+This is absurd, which concludes the question.
+
+\SQ{2}
+Let us define an EL-alternating path (even-length alternating path) in the following way. It is a path in the graph consisting of an unmatched edge then a matched edge then again unmatched ect... Even length in the sense that there must be an even number of such edges, so these paths will always end with a matched edge.
+
+Let us prove the following invariant up to the end of the while loop: at every step of the algorithm, the set of red vartices is independent (1) , and every red edge is the end of an EL-alternating path (2).
+
+Initialisation: \\
+(1) : The initial set of red vertices is those that are not matched in the maximal matching, if there were any edges between these vertices, that edge could be added to the matching, thus contradicting the maximality clause. \\
+(2) : Each of these edges is unmatched so ends of an EL-alternating path of length 0. \\
+
+In the while loop: \\
+
+Let \( u \) be a vertex selected by the algorithm, colored in blue, and \( v \) the matched vertex, whihc we are about to color in red. \( u \) was selcted because it is the neighbor of some red edge, which we will call \(s\). We know from (2) that \( s \), as a red edge, is the end of a EL-alternative path. \\
+
+(2) : By apending \( (s,u) \) and \( (u,v) \) to this path, we fufill the condition for \( v\). \\
+(1) : If \( u\)  were connected to some red vertex \( r\), the edge \( (u,r) \)would be unmatched (since \( u \) is already matched to \( v \), a blue vertex), then, by concatenating the EL-alternating path ending on \( u \), the edge \( (u,r) \) and the path that \( r \) is the end of, we would obtain an alternating path P. This is absurd, since we could then make every matched edge in P unmatched, and every unmatched edge matched, and get a strictly larger matching. \\
+
+To conclude the algorithm: \\
+All the vertices that get colored at the end of the algorithm were not caught by the while loop, which means they are not adjacent to any red vertex. Since the graph is bipartie, there are no edges within \( U \). So the remaining vertices in \( U \) and the previous red edges (which were independent according to (1)), are in fact an independent set.\\
+
+In the end we added one vertex per element of \(M\), since the edges of \( M \) see both their edges colored at every iteration of the while loop, and at the end, we choose one vertex for each of the remaining edges.
+
+
+
+In this way, we started with all the unmatched vertices (and there are \( 2n - 2k \) of them), and we added a vertex per element of \( M \), (so we added \( k \)). This means we have an independent set of size \( 2n -k \), we know from question 1 that this is the upper bound, so we have in fact found a maximal independent set.\\
+
+The algorithm is in fact correct!
+\end{document}
+
+
+
+

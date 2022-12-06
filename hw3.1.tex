@@ -1,0 +1,31 @@
+%Colle du Mercredi 28 a Janson, edp
+\documentclass{scrartcl}
+
+\usepackage{cmap}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{ marvosym }
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Homework 3: Question 1}
+\author{Oscar Garnier}
+\date{\today}
+
+
+\begin{document}
+\newcommand{\E}[1]{\section*{Exo #1}}
+\newcommand{\CR}[2]{\section*{#1 // note : #2}}
+\newcommand{\Q}[1]{\section*{Exercise #1}}
+\newcommand{\SQ}[1]{\subsection*{Question #1}}
+\maketitle
+
+This algorithm would not work, because there is a subtle error: when \( k = i \), \( id[i] \) will change to \( id[j] \), and then we will miss all the other elements who were in the same class as \( i \), since their flag will be the old \( id[i] \) not the new one. To correct this, we would have to store \( id[i] \) as a \emph{flag} variable, and then run the tests with \emph{flag}.
+
+\end{document}
+
+
+
+
